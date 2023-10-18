@@ -19,6 +19,7 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     const selectedDate = new Date(selectedDates[0]);
+
     if (selectedDate.getTime() > Date.now()) {
       startButton.disabled = false;
     } else {
@@ -36,13 +37,13 @@ function timer(seconds) {
 
   counter = setInterval(() => {
     const secondsLeft = Math.round((then - Date.now()) / 1000);
-    console.log(counter);
+
     if (secondsLeft < 0) {
       clearInterval(counter);
       return;
     }
 
-    displayTimeLeft(secondsLeft);
+    timeLeft(secondsLeft);
   }, 1000);
 }
 
@@ -50,7 +51,7 @@ function addLeadingZero(value) {
   return String(value).padStart(2, '0');
 }
 
-function displayTimeLeft(seconds) {
+function timeLeft(seconds) {
   const days = Math.floor(seconds / (3600 * 24));
   const hours = Math.floor((seconds % (3600 * 24)) / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
@@ -70,6 +71,7 @@ function onStart(event) {
 
   if (seconds > 0) {
     timer(seconds);
+
     startButton.disabled = true;
   }
 }
